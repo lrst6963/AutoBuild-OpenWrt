@@ -86,7 +86,7 @@ jobs:
 
     - name: Configuration Customization - Build_OP_MI_R3G | 配置定制
       env:
-        CONFIG_FILE: 'x86_64.config'
+        CONFIG_FILE: 'Mi_R3G.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x ./customize.sh && ./customize.sh
