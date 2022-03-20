@@ -29,7 +29,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
-    - name: Initialization environment
+    - name: Initialization environment | 安装编译环境
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
@@ -58,7 +58,7 @@ jobs:
         sudo -E apt-get -y autoremove --purge
         sudo -E apt-get clean
 
-    - name: Clone source code
+    - name: Clone source code | 克隆源代码
       env: 
         REPO_URL: https://github.com/coolsnowwolf/lede
         REPO_BRANCH: master
@@ -74,16 +74,15 @@ jobs:
         ./scripts/feeds install -a
         ./scripts/feeds install -a
 
-    #- name: Import external feeds - passwall
-    #  working-directory: ./openwrt
-    #  run: |
-    #    git clone https://github.com/xiaorouji/openwrt-passwall.git package/lienol
-    #    git clone "your_github_link" package/"your_folder_name"      
+    - name: Import external feeds - small-package | 克隆 small-package 库
+      working-directory: ./openwrt
+      run: |
+        git clone https://github.com/kenzok8/small-package package/small-package     
 
-    #- name: Import external feeds - JerryKuKu Argon
-    #  working-directory: ./openwrt
-    #  run: |
-    #    git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon-jerrykuku
+    - name: Import external feeds - luci-theme-neobird | 克隆 luci-theme-neobird 库
+      working-directory: ./openwrt
+      run: |
+        git clone https://github.com/thinktip/luci-theme-neobird.git package/luci-theme-neobird
 
     - name: Configuration Customization - Build_x86_64
       env:
@@ -93,14 +92,14 @@ jobs:
         chmod +x ./customize.sh && ./customize.sh
         cd openwrt && make defconfig
         
-    - name: Download package
+    - name: Download package | 下载引用库
       working-directory: ./openwrt
       run: |
         make download -j$(nproc)
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
 
-    - name: Build firmware
+    - name: Build firmware | 编译固件
       working-directory: ./openwrt
       run: |
         echo -e "$(nproc) thread build."
