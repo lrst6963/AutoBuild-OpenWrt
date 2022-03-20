@@ -5,18 +5,18 @@
 # Youtube Channel: https://goo.gl/fvkdwm 
 #=================================================
 
-name: Build_x86_64
+name: Build_OP_MI_R3G.yml
 
 on: 
   release:
     types: [published]
 
-  push:
-    branches: 
-      - master
+  #push:
+  #  branches: 
+  #    - master
 
-  schedule:
-    - cron: 0 20 * * 6
+  #schedule:
+  #  - cron: 0 20 * * 6
   
   #watch:
   #  types: [started]
@@ -65,6 +65,7 @@ jobs:
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
+        echo "src-git ssrp https://github.com/fw876/helloworld.git" >> ./feeds.conf.default
         
     - name: Update & Install feeds
       working-directory: ./openwrt
@@ -83,7 +84,7 @@ jobs:
       run: |
         git clone https://github.com/thinktip/luci-theme-neobird.git package/luci-theme-neobird
 
-    - name: Configuration Customization - Build_x86_64
+    - name: Configuration Customization - Build_OP_MI_R3G | 配置定制
       env:
         CONFIG_FILE: 'x86_64.config'
       run: |
