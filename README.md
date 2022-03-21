@@ -6,20 +6,20 @@
 
 Build OpenWrt firware [Lean's OpenWrt](https://github.com/coolsnowwolf/lede) using GitHub Actions  
 Hereby thank P3TERX for his amazing job: https://github.com/P3TERX/Actions-OpenWrt/  
-
 Hereby thank KFERMercer for his amazing job: https://github.com/KFERMercer/OpenWrt-CI  
-You could edit and enable "Sync Code" YAML file to let your forked repo keep updated.
 
-## Usage
+## Usage | 使用
 
 🔥🔥[Video Tutorial (in Mandrin) | 视频教程(国语)](https://youtu.be/9YO7nxNry-4)📺🎉
 
 **1. Prerequisite**
   - Sign up for [GitHub Actions](https://github.com/features/actions/signup)
-  - Fork [this GitHub repository](https://github.com/esirplayground/AutoBuild-OpenWrt)
+  > 注册[GitHub Actions](https://github.com/features/actions/signup)
+  - Fork [this GitHub repository](https://github.com/lrst6963/AutoBuild-OpenWrt)
     
 **2. Compile Firmware**
   - Click `[.github/workflows]` folder on the top of repo and you could see few workflow files, Each for one particular architecture(device).
+  > 点击 `[.github/workflows]` 文件夹，你可以看到一些工作流文件，每个为一个特定的架构(设备)。
   - Edit the workflow file you desire，uncomment push section 3 lines together and submit the commit.(Other 2 methods wait you to discover)
   - The build starts automatically. Progress can be viewed on the Actions page.
   - When the build is complete, click the `Artifacts` button in the upper right corner of the Actions page to download the binaries.
