@@ -83,6 +83,12 @@ jobs:
       run: |
         ./scripts/feeds update -a && ./scripts/feeds install -a
 
+    - name: change config | 更改配置
+      working-directory: ./openwrt
+      run: |
+        sed -i 's/hostname='"'"'OpenWrt'"'"'/hostname='"'"'Mi_R3G'"'"'/g' package/base-files/files/bin/config_generate
+        seq -i 's/lan) ipad=${ipaddr:-"192.168.1.1"} ;;/lan) ipad=${ipaddr:-"192.168.168.1"} ;;/g' package/base-files/files/bin/config_generate
+
     - name: Configuration Customization - Build_OP_MI_R3G | 配置定制
       env:
         CONFIG_FILE: 'Mi_R3G.config'
@@ -90,6 +96,7 @@ jobs:
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x ./customize.sh && ./customize.sh
         cd openwrt && make defconfig
+        cat .config
         
     - name: Download package | 下载引用库
       working-directory: ./openwrt
