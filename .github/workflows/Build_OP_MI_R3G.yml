@@ -81,7 +81,7 @@ jobs:
       working-directory: ./openwrt
       run: |
         sed -i 's/hostname='"'"'OpenWrt'"'"'/hostname='"'"'Mi_R3G'"'"'/g' package/base-files/files/bin/config_generate
-        seq -i 's/lan) ipad=${ipaddr:-"192.168.1.1"} ;;/lan) ipad=${ipaddr:-"192.168.168.1"} ;;/g' package/base-files/files/bin/config_generate
+        sed -i 's/lan) ipad=${ipaddr:-"192.168.1.1"} ;;/lan) ipad=${ipaddr:-"192.168.168.1"} ;;/g' package/base-files/files/bin/config_generate
 
     - name: Configuration Customization - Build_OP_MI_R3G | 配置定制
       env:
