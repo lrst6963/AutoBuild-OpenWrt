@@ -16,7 +16,7 @@ Hereby thank KFERMercer for his amazing job: https://github.com/KFERMercer/OpenW
   - Sign up for [GitHub Actions](https://github.com/features/actions/signup)
   > 注册[GitHub Actions](https://github.com/features/actions/signup)
   - Fork [this GitHub repository](https://github.com/lrst6963/AutoBuild-OpenWrt)
-  > 复刻 [这个 GitHub 存储库](https://github.com/lrst6963/AutoBuild-OpenWrt)
+  > 复刻[这个 GitHub 存储库](https://github.com/lrst6963/AutoBuild-OpenWrt)
     
 **2. Compile Firmware | 编译固件**
   - Click `[.github/workflows]` folder on the top of repo and you could see few workflow files, Each for one particular architecture(device).
