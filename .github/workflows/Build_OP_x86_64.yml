@@ -75,12 +75,7 @@ jobs:
     - name: Import external feeds - small-package | 克隆 small-package 库
       working-directory: ./openwrt
       run: |
-        git clone https://github.com/kenzok8/small-package package/small-package     
-
-    - name: Import external feeds - luci-theme-neobird | 克隆 luci-theme-neobird 库
-      working-directory: ./openwrt
-      run: |
-        git clone https://github.com/thinktip/luci-theme-neobird.git package/luci-theme-neobird
+        git clone https://github.com/lrst6963/small-package package/small-package     
 
     - name: Configuration Customization - Build_x86_64
       env:
