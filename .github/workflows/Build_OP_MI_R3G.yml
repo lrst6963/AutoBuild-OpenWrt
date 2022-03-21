@@ -5,7 +5,7 @@
 # Youtube Channel: https://goo.gl/fvkdwm 
 #=================================================
 
-name: Build_OP_MI_R3G.yml
+name: Build_OP_MI_R3G
 
 on: 
   release:
