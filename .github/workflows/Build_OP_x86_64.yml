@@ -33,7 +33,7 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        echo $(lsb_release -d)
+        echo "工作流运行于：$(lsb_release -d)"
         set +e
         docker rmi `docker images -q`
         echo "Deleting files, please wait ..."
