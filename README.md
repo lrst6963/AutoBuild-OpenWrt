@@ -16,16 +16,17 @@ Hereby thank KFERMercer for his amazing job: https://github.com/KFERMercer/OpenW
   - Sign up for [GitHub Actions](https://github.com/features/actions/signup)
   > 注册[GitHub Actions](https://github.com/features/actions/signup)
   - Fork [this GitHub repository](https://github.com/lrst6963/AutoBuild-OpenWrt)
+  > 复刻 [这个 GitHub 存储库](https://github.com/lrst6963/AutoBuild-OpenWrt)
     
 **2. Compile Firmware**
   - Click `[.github/workflows]` folder on the top of repo and you could see few workflow files, Each for one particular architecture(device).
-  > 点击 `[.github/workflows]` 文件夹，你可以看到一些工作流文件，每个为一个特定的架构(设备)。
+  > 点击 `[.github/workflows]` 文件夹，你可以看到一些工作流文件，每个为一个特定的架构(设备)
   - Edit the workflow file you desire，uncomment push section 3 lines together and submit the commit.(Other 2 methods wait you to discover)
+  > 编辑您想要的工作流文件，取消注释，将第3节推到一起，并提交更改。(其他两种方法等你去发现)
   - The build starts automatically. Progress can be viewed on the Actions page.
+  > 生成启动。进度可以在 Actions 页面上查看
   - When the build is complete, click the `Artifacts` button in the upper right corner of the Actions page to download the binaries.
+  > 当构建完成后，点击 Actions 页面右上角的‘ Artifacts’按钮来下载二进制文件
   - Mi_R3G 默认Web IP：`192.168.168.1` 密码：`password`
   - x86_64 默认Web IP：`192.168.1.1` 密码：`password`
 
-**3. Sync Code**
-  - Uncomment 'push-branches-master' 3 lines under **`On`** section and commit changes to let the script sync the code once for you.
-  - Uncomment 'schedule-cron' 2 lines under **`On`** section and commit changes to let the script sync the code everyday on 3 am[UTC +8]
