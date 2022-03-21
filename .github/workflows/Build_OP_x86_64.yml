@@ -23,7 +23,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
     - name: Checkout
@@ -33,6 +33,7 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
+        echo $(lsb_release -d)
         set +e
         docker rmi `docker images -q`
         echo "Deleting files, please wait ..."
@@ -69,9 +70,7 @@ jobs:
     - name: Update & Install feeds
       working-directory: ./openwrt
       run: |
-        ./scripts/feeds update -a
-        ./scripts/feeds install -a
-        ./scripts/feeds install -a
+        ./scripts/feeds update -a && ./scripts/feeds install -a
 
     - name: Import external feeds - small-package | 克隆 small-package 库
       working-directory: ./openwrt
@@ -95,8 +94,6 @@ jobs:
       working-directory: ./openwrt
       run: |
         make download -j$(nproc)
-        find dl -size -1024c -exec ls -l {} \;
-        find dl -size -1024c -exec rm -f {} \;
 
     - name: Build firmware | 编译固件
       working-directory: ./openwrt

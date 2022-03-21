@@ -23,7 +23,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
     - name: Checkout
@@ -33,6 +33,7 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
+        echo $(lsb_release -d)
         set +e
         docker rmi `docker images -q`
         echo "Deleting files, please wait ..."
@@ -65,14 +66,6 @@ jobs:
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
-        echo "src-git ssrp https://github.com/fw876/helloworld.git" >> ./feeds.conf.default
-        
-    - name: Update & Install feeds
-      working-directory: ./openwrt
-      run: |
-        ./scripts/feeds update -a
-        ./scripts/feeds install -a
-        ./scripts/feeds install -a
 
     - name: Import external feeds - small-package | 克隆 small-package 库
       working-directory: ./openwrt
@@ -83,6 +76,12 @@ jobs:
       working-directory: ./openwrt
       run: |
         git clone https://github.com/thinktip/luci-theme-neobird.git package/luci-theme-neobird
+
+        
+    - name: Update & Install feeds
+      working-directory: ./openwrt
+      run: |
+        ./scripts/feeds update -a && ./scripts/feeds install -a
 
     - name: Configuration Customization - Build_OP_MI_R3G | 配置定制
       env:
@@ -96,14 +95,12 @@ jobs:
       working-directory: ./openwrt
       run: |
         make download -j$(nproc)
-        find dl -size -1024c -exec ls -l {} \;
-        find dl -size -1024c -exec rm -f {} \;
 
     - name: Build firmware | 编译固件
       working-directory: ./openwrt
       run: |
         echo -e "$(nproc) thread build."
-        make -j$(nproc) || make -j$(nproc) V=s
+        make -j$(nproc) || make -j$(nproc) 
 
     - name : Upload artifact
       uses: actions/upload-artifact@master
