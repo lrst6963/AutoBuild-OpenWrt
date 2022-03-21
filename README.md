@@ -12,13 +12,13 @@ Hereby thank KFERMercer for his amazing job: https://github.com/KFERMercer/OpenW
 
 🔥🔥[Video Tutorial (in Mandrin) | 视频教程(国语)](https://youtu.be/9YO7nxNry-4)📺🎉
 
-**1. Prerequisite**
+**1. Prerequisite | 必要条件**
   - Sign up for [GitHub Actions](https://github.com/features/actions/signup)
   > 注册[GitHub Actions](https://github.com/features/actions/signup)
   - Fork [this GitHub repository](https://github.com/lrst6963/AutoBuild-OpenWrt)
   > 复刻 [这个 GitHub 存储库](https://github.com/lrst6963/AutoBuild-OpenWrt)
     
-**2. Compile Firmware**
+**2. Compile Firmware | 编译固件**
   - Click `[.github/workflows]` folder on the top of repo and you could see few workflow files, Each for one particular architecture(device).
   > 点击 `[.github/workflows]` 文件夹，你可以看到一些工作流文件，每个为一个特定的架构(设备)
   - Edit the workflow file you desire，uncomment push section 3 lines together and submit the commit.(Other 2 methods wait you to discover)
