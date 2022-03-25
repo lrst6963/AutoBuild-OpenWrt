@@ -38,7 +38,7 @@ Hereby thank KFERMercer for his amazing job: https://github.com/KFERMercer/OpenW
 
 3. 点击上方菜单中的`Settings`,依次点击`Secrets`-`New repository secret`
 
-其中`Name`项填写`PUSHPLUS_TOKEN`,然后将你的 **Token** 粘贴到`Value`项,完成后点击`Add secert`
+4. 其中`Name`项填写`PUSHPLUS_TOKEN`,然后将你的 **Token** 粘贴到`Value`项,完成后点击`Add secert`
 
 * 对应`.github/workflows`目录下的`yml`工作流文件里的`PUSHPLUS_TOKEN`名称（依据自己yml文件修改）
 
