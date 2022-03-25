@@ -97,13 +97,30 @@ jobs:
         make download -j$(nproc)
 
     - name: Build firmware | 编译固件
+      env:
+        PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
       working-directory: ./openwrt
       run: |
         echo -e "$(nproc) thread build."
         make -j$(nproc) || make -j$(nproc) 
+        if [ $? -ne 0 ];then
+          curl -X GET 'http://www.pushplus.plus/send?token=${{ PUSHPLUS_TOKEN }}&title=R3G%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF%EF%BC%81&content=%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF%EF%BC%81&template=html
+        else
+          curl -X GET 'http://www.pushplus.plus/send?token=${{ PUSHPLUS_TOKEN }}&title=Github%20Actions%20OpenWrt%20Build%20R3G%20&content=%E7%BC%96%E8%AF%91%E6%88%90%E5%8A%9F!&template=html
+        fi
+
 
     - name : Upload artifact
       uses: actions/upload-artifact@master
       with:
         name: OpenWrt_Mi_R3G
         path: openwrt/bin
+
+    - name: Upload To Transfer.sh
+      env:
+        ZIP_FILE_NAME: openwrt-ramips-mt7621-xiaomi_mi-router-3g-$(date +%Y%m%d%H%M).zip
+        PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+      working-directory: ./openwrt
+      run: |
+        zip -r $ZIP_FILE_NAME ./openwrt/bin
+        curl -X GET 'http://www.pushplus.plus/send?token=${{ PUSHPLUS_TOKEN }}&title=OpenWrt%20Build%20R3G%20&content=%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5%3A$(curl --upload-file ./$ZIP_FILE_NAME https://transfer.sh/$ZIP_FILE_NAME)&template=html
