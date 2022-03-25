@@ -30,3 +30,19 @@ Hereby thank KFERMercer for his amazing job: https://github.com/KFERMercer/OpenW
   - Mi_R3G 默认Web IP：`192.168.168.1` 密码：`password`
   - x86_64 默认Web IP：`192.168.1.1` 密码：`password`
 
+### 使用PushPlus进行微信推送通知
+
+1. 注册[PushPlus](https://www.pushplus.plus/)并复制页面中生成的 **Token**
+
+2. **Fork** 我的`AutoBuild-OpenWrt`仓库,然后进入你的`AutoBuild-OpenWrt`仓库进行之后的设置
+
+3. 点击上方菜单中的`Settings`,依次点击`Secrets`-`New repository secret`
+
+其中`Name`项填写`PUSHPLUS_TOKEN`,然后将你的 **Token** 粘贴到`Value`项,完成后点击`Add secert`
+
+* 对应`.github/workflows`目录下的`yml`工作流文件里的`PUSHPLUS_TOKEN`名称（依据自己yml文件修改）
+
+* 可通过[PushPlus](https://www.pushplus.plus/) 推送编译结果到微信
+
+
+
