@@ -16,7 +16,7 @@ on:
   #    - master
 
   schedule:
-    - cron: 0 18 * * *
+    - cron: 0 10 * * *
   
   watch:
     types: [started]
@@ -123,4 +123,8 @@ jobs:
       working-directory: ./openwrt
       run: |
         zip -r $ZIP_FILE_NAME ./openwrt/bin
+<<<<<<< HEAD
         curl -X GET 'http://www.pushplus.plus/send?token=${{ secrets.PUSHPLUS_TOKEN }}&title=OpenWrt%20Build%20R3G%20&content=%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5%3A$(curl --upload-file ./$ZIP_FILE_NAME https://transfer.sh/$ZIP_FILE_NAME)&template=html
+=======
+        curl -X GET 'http://www.pushplus.plus/send?token=${{ secrets.PUSHPLUS_TOKEN }}&title=OpenWrt%20Build%20R3G%20&content=%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5%3A$(curl --upload-file ./$ZIP_FILE_NAME https://transfer.sh/$ZIP_FILE_NAME)&template=html
+>>>>>>> 32c1c0e94c9d666b372e6d58f45be32c4aa260d3
