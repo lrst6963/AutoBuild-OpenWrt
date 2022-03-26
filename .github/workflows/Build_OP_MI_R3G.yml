@@ -123,4 +123,4 @@ jobs:
       run: |
         ZIP_FILE_NAME="openwrt-ramips-mt7621-xiaomi_mi-router-3g-$(date +%Y%m%d%H%M).zip"
         zip -r $ZIP_FILE_NAME ./openwrt/bin
-        curl -X GET "http://www.pushplus.plus/send?token=${{ secrets.PUSHPLUS_TOKEN }}&title=OpenWrt%20Build%20R3G%20&content=%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5%3A$(curl --upload-file ./$ZIP_FILE_NAME https://transfer.sh/$ZIP_FILE_NAME)&template=html" > /dev/null
+        curl -sX GET "http://www.pushplus.plus/send?token=${{ secrets.PUSHPLUS_TOKEN }}&title=OpenWrt%20Build%20R3G%20&content=%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5%3A$(curl --upload-file ./$ZIP_FILE_NAME https://transfer.sh/$ZIP_FILE_NAME)&template=html" > /dev/null
