@@ -125,7 +125,8 @@ jobs:
       run: |
         ZIP_FILE_NAME="openwrt-ramips-mt7621-xiaomi_mi-router-3g-$(date +%Y%m%d%H%M).zip"
         zip -r $ZIP_FILE_NAME ./bin/*
-        curl -sX GET "http://www.pushplus.plus/send?token=${{ secrets.PUSHPLUS_TOKEN }}&title=OpenWrt%20Build%20R3G%20&content=%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5%EF%BC%9A$(curl --upload-file ./$ZIP_FILE_NAME https://transfer.sh/$ZIP_FILE_NAME)&template=html" > /dev/null
+        curl -sX POST "https://ntfy.sh/${{ secrets.NTFY_TOKEN }}" -H "Click: $(curl --upload-file ./$ZIP_FILE_NAME https://transfer.sh/$ZIP_FILE_NAME)" -d "OpenWrt R3G 编译成功！ 下载链接保留七天！" > /dev/null
+        curl --upload-file ./$ZIP_FILE_NAME "https://transfer.sh/build-$ZIP_FILE_NAME"
 
 
     - name: Delete workflow runs
