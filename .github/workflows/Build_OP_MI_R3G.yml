@@ -70,7 +70,7 @@ jobs:
     - name: Import external feeds - small-package | 克隆 small-package 库
       working-directory: ./openwrt
       run: |
-        git clone https://github.com/lrst6963/small-package package/small-package     
+        git clone https://github.com/kenzok8/small-package.git package/small-package     
   
     - name: Update & Install feeds
       working-directory: ./openwrt
