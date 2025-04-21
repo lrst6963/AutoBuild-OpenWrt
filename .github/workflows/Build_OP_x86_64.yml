@@ -57,11 +57,13 @@ jobs:
         sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
         rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd*,miniupnpd-iptables,wireless-regdb}
         ./scripts/feeds update -a && ./scripts/feeds install -a
+        git clone https://github.com/lrst6963/luci-theme-material3 package/lrst6963repo
+        ./scripts/feeds update -a && ./scripts/feeds install -a
 
-    - name: Import Packeage
-      working-directory: ./openwrt
-      run: |
-        git clone https://github.com/lrst6963/luci-theme-material3 package/lrst6963repo     
+    # - name: Import Packeage
+    #   working-directory: ./openwrt
+    #   run: |
+    #     git clone https://github.com/lrst6963/luci-theme-material3 package/lrst6963repo     
 
     # - name: Configuration Customization - Build_x86_64
     #   env:
