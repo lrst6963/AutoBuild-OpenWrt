@@ -22,10 +22,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-       TERM: linux
-       DEBIAN_FRONTEND: noninteractive
-       FORCE_UNSAFE_CONFIGURE: 1
 
     steps:
     - name: Checkout
