@@ -69,10 +69,10 @@ jobs:
     #     sed -i '2a uci set luci.main.mediaurlbase='"'"'/luci-static/argonne'"'"'' package/lean/default-settings/files/zzz-default-settings
     #     cat .config
         
-    - name: Download package | 下载引用库
-      working-directory: ./openwrt
-      run: |
-        make download -j$(nproc)
+    # - name: Download package | 下载引用库
+    #   working-directory: ./openwrt
+    #   run: |
+    #     make download -j$(nproc)
 
     - name: Build firmware | 编译固件
       working-directory: ./openwrt
