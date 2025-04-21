@@ -15,15 +15,9 @@ on:
     branches: 
       - master
 
-  #schedule:
-  #  - cron: 0 20 * * 6
-  
-  #watch:
-  #  types: [started]
-
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout
@@ -47,31 +41,33 @@ jobs:
 
     - name: Clone source code | 克隆源代码
       env: 
-        REPO_URL: https://github.com/coolsnowwolf/lede
+        REPO_URL: https://github.com/openwrt/openwrt
         REPO_BRANCH: master
       run: |
-        git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
+        git clone $REPO_URL -b $REPO_BRANCH openwrt
         sudo chown $USER:$GROUPS openwrt
         cd openwrt
         
-    - name: Update & Install feeds
+    - name: Add Package & Update & Install feeds
       working-directory: ./openwrt
       run: |
+        sed -i '$a src-git lrst6963repo https://github.com/lrst6963/luci-app-cfddns' feeds.conf.default
+        sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
         ./scripts/feeds update -a && ./scripts/feeds install -a
 
-    - name: Import external feeds - small-package | 克隆 small-package 库
+    - name: Import Packeage
       working-directory: ./openwrt
       run: |
-        git clone https://github.com/lrst6963/small-package package/small-package     
+        git clone https://github.com/lrst6963/luci-theme-material3 package/lrst6963repo     
 
-    - name: Configuration Customization - Build_x86_64
-      env:
-        CONFIG_FILE: 'config/x86_64.config'
-      run: |
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        cd openwrt && make defconfig
-        sed -i '2a uci set luci.main.mediaurlbase='"'"'/luci-static/argonne'"'"'' package/lean/default-settings/files/zzz-default-settings
-        cat .config
+    # - name: Configuration Customization - Build_x86_64
+    #   env:
+    #     CONFIG_FILE: 'config/x86_64.config'
+    #   run: |
+    #     [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+    #     cd openwrt && make defconfig
+    #     sed -i '2a uci set luci.main.mediaurlbase='"'"'/luci-static/argonne'"'"'' package/lean/default-settings/files/zzz-default-settings
+    #     cat .config
         
     - name: Download package | 下载引用库
       working-directory: ./openwrt
