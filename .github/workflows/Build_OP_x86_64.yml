@@ -8,11 +8,8 @@
 name: Build_x86_64
 
 env:
-  TERM: linux
-  DEBIAN_FRONTEND: noninteractive
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: master
-  DELETE_USELESS_FILES: false
   
 on: 
   release:
@@ -25,6 +22,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+       TERM: linux
+       DEBIAN_FRONTEND: noninteractive
+       FORCE_UNSAFE_CONFIGURE: 1
 
     steps:
     - name: Checkout
@@ -77,7 +78,7 @@ jobs:
     - name: Download package | 下载引用库
       working-directory: ./openwrt
       run: |
-        make download -j$(nproc)
+        make download -j$(nproc) V=s
 
     - name: Build firmware | 编译固件
       working-directory: ./openwrt
