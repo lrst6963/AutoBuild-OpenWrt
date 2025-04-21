@@ -46,13 +46,12 @@ jobs:
         sudo -E apt-get -y autoremove --purge
         sudo -E apt-get clean
 
-    - name: Clone source code | 克隆源代码
+    - name: Clone source code
       run: |
-        git clone $REPO_URL -b $REPO_BRANCH openwrt
-        sudo chown $USER:$GROUPS openwrt
+        git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
         
-    - name: Add Package & Update & Install feeds
+    - name: Update & Install feeds
       working-directory: ./openwrt
       run: |
         sed -i '$a src-git lrst6963repo https://github.com/lrst6963/luci-app-cfddns' feeds.conf.default
@@ -62,26 +61,20 @@ jobs:
         git clone https://github.com/lrst6963/luci-theme-material3 package/lrst6963repo
         ./scripts/feeds update -a && ./scripts/feeds install -a
 
-    # - name: Import Packeage
-    #   working-directory: ./openwrt
-    #   run: |
-    #     git clone https://github.com/lrst6963/luci-theme-material3 package/lrst6963repo     
-
-    # - name: Configuration Customization - Build_x86_64
-    #   env:
-    #     CONFIG_FILE: 'config/x86_64.config'
-    #   run: |
-    #     [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-    #     cd openwrt && make defconfig
-    #     sed -i '2a uci set luci.main.mediaurlbase='"'"'/luci-static/argonne'"'"'' package/lean/default-settings/files/zzz-default-settings
-    #     cat .config
+    - name: Configuration Customization - Build_x86_64
+      env:
+        CONFIG_FILE: 'config/x86_64.config'
+      run: |
+        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        chmod +x ./customize.sh && ./customize.sh
+        cd openwrt && make defconfig
         
-    - name: Download package | 下载引用库
+    - name: Download package
       working-directory: ./openwrt
       run: |
         make download -j$(nproc)
 
-    - name: Build firmware | 编译固件
+    - name: Build firmware
       working-directory: ./openwrt
       run: |
         echo -e "$(nproc) thread build."
@@ -90,5 +83,5 @@ jobs:
     - name : Upload artifact
       uses: actions/upload-artifact@master
       with:
-        name: OpenWrt_x86_64
+        name: OpenWrt
         path: openwrt/bin
