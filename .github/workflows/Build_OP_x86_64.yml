@@ -53,6 +53,7 @@ jobs:
       run: |
         sed -i '$a src-git lrst6963repo https://github.com/lrst6963/luci-app-cfddns' feeds.conf.default
         sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
+        rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd*,miniupnpd-iptables,wireless-regdb}
         ./scripts/feeds update -a && ./scripts/feeds install -a
 
     - name: Import Packeage
@@ -69,10 +70,10 @@ jobs:
     #     sed -i '2a uci set luci.main.mediaurlbase='"'"'/luci-static/argonne'"'"'' package/lean/default-settings/files/zzz-default-settings
     #     cat .config
         
-    # - name: Download package | 下载引用库
-    #   working-directory: ./openwrt
-    #   run: |
-    #     make download -j$(nproc)
+    - name: Download package | 下载引用库
+      working-directory: ./openwrt
+      run: |
+        make download -j$(nproc)
 
     - name: Build firmware | 编译固件
       working-directory: ./openwrt
