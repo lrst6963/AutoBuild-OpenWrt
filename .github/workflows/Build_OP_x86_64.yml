@@ -10,6 +10,7 @@ name: Build_x86_64
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: master
+  TERM: xterm-256color
   
 on: 
   release:
