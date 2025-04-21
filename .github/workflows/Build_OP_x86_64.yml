@@ -7,6 +7,13 @@
 
 name: Build_x86_64
 
+env:
+  TERM: linux
+  DEBIAN_FRONTEND: noninteractive
+  REPO_URL: https://github.com/openwrt/openwrt
+  REPO_BRANCH: master
+  DELETE_USELESS_FILES: false
+  
 on: 
   release:
     types: [published]
@@ -14,7 +21,7 @@ on:
   push:
     branches: 
       - master
-
+  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -40,9 +47,6 @@ jobs:
         fi
 
     - name: Clone source code | 克隆源代码
-      env: 
-        REPO_URL: https://github.com/openwrt/openwrt
-        REPO_BRANCH: master
       run: |
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         sudo chown $USER:$GROUPS openwrt
